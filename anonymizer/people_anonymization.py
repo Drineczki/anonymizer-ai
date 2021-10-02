@@ -55,7 +55,7 @@ def anonymize_people(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[Anon
             if len(person_tokens) > 1
             else f"{first_anonymization_char}."
         )
-        res = AnonymizationResult(entity=person_text, anonymization=anonymization)
+        res = AnonymizationResult(entity=person_text, anonymization=anonymization, anon_type="pers")
 
         anonymization_results.append(res)
 

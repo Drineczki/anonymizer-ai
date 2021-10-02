@@ -51,7 +51,7 @@ def __anonymize_cities(city_tokens: t.List[spacy.tokens.Token]) -> t.List[Anonym
         city_text = " ".join([token.text for token in city_tokens])
 
         anonymization = f"{city_tokens[0].text[0]}."
-        res = AnonymizationResult(entity=city_text, anonymization=anonymization)
+        res = AnonymizationResult(entity=city_text, anonymization=anonymization, anon_type="place")
 
         anonymization_results.append(res)
 

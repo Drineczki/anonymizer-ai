@@ -5,3 +5,4 @@ from dataclasses import dataclass
 class AnonymizationResult:
     entity: str
     anonymization: str
+    anon_type: str
