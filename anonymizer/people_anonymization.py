@@ -7,16 +7,6 @@ import anonymizer.constants as c
 from anonymizer.result import AnonymizationResult
 
 
-def __load_assets(assets_file: str) -> t.List[str]:
-    with open(assets_file, "r") as yaml_file:
-        asset = yaml.load(yaml_file, Loader=yaml.Loader)
-
-    return asset["people"]
-
-
-PUBLIC_PEOPLE_ENTITIES: t.List[str] = __load_assets(c.PUBLIC_ENTITIES_YAML)
-
-
 def anonymize_people(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[AnonymizationResult]:
     people_tokens = __preprocess(nlp_results)
     if len(people_tokens) == 0:
@@ -76,7 +66,7 @@ def __preprocess(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[spacy.to
                     if backtracked_index >= 0:
                         check_result = (
                             check_result
-                            and not nlp_results[backtracked_index].lemma_ in PUBLIC_PEOPLE_ENTITIES
+                            and not nlp_results[backtracked_index].lemma_ in c.PUBLIC_PEOPLE_ENTITIES
                         )
 
                 if check_result:
