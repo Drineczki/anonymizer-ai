@@ -21,8 +21,7 @@ class DocumentAnonymizer:
         people_anonymization = peo_anon.anonymize_people(nlp_results)
         place_anonymization = pla_anon.anonymize_places(nlp_results)
 
-        return place_anonymization
-        # return [*people_anonymization, *place_anonymization]
+        return [*people_anonymization, *place_anonymization]
 
     def _preprocess(self, text: str) -> str:
         text = text.strip()

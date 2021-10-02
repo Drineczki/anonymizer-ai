@@ -18,12 +18,11 @@ PUBLIC_PEOPLE_ENTITIES: t.List[str] = __load_assets(c.PUBLIC_ENTITIES_YAML)
 
 
 def anonymize_people(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[AnonymizationResult]:
-    people_tokens = preprocess(nlp_results)
+    people_tokens = __preprocess(nlp_results)
     if len(people_tokens) == 0:
         return []
 
     merged_tokens: t.List[t.List[spacy.tokens.Token, ...]] = []
-
     loop_cnt = 0
     while loop_cnt < len(people_tokens):
         if people_tokens[loop_cnt].ent_iob_ == "B":
@@ -45,7 +44,6 @@ def anonymize_people(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[Anon
         loop_cnt += 1
 
     anonymization_results: t.List[AnonymizationResult] = []
-
     for person_tokens in merged_tokens:
         person_text = " ".join([token.text for token in person_tokens])
 
@@ -64,7 +62,7 @@ def anonymize_people(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[Anon
     return anonymization_results
 
 
-def preprocess(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[spacy.tokens.Token]:
+def __preprocess(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[spacy.tokens.Token]:
     BACKTRACK_WINDOW = 10
 
     people_tokens = []
