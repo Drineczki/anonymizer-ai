@@ -59,4 +59,32 @@ def __anonymize_cities(city_tokens: t.List[spacy.tokens.Token]) -> t.List[Anonym
 
 
 def __preprocess_cities(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[spacy.tokens.Token]:
-    return [token for token in nlp_results if token.ent_type_ == "placeName"]
+    BACKTRACK_WINDOW = 5
+
+    city_tokens = []
+    loop_cnt = 0
+    while loop_cnt < len(nlp_results):
+        if nlp_results[loop_cnt].ent_type_ == "placeName":
+            if nlp_results[loop_cnt].ent_iob_ == "B":
+                check_result = True
+                for i in range(1, BACKTRACK_WINDOW + 1):
+                    backtracked_index = loop_cnt - i
+                    if backtracked_index >= 0:
+                        check_result = (
+                            check_result
+                            and not nlp_results[backtracked_index].lemma_ in PUBLIC_PLACES_ENTITIES
+                        )
+
+                if check_result:
+                    city_tokens.append(nlp_results[loop_cnt])
+
+                loop_cnt += 1
+                while loop_cnt < len(nlp_results) and nlp_results[loop_cnt].ent_iob_ == "I":
+                    if check_result:
+                        city_tokens.append(nlp_results[loop_cnt])
+                    loop_cnt += 1
+                continue
+
+        loop_cnt += 1
+
+    return city_tokens
