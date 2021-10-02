@@ -30,7 +30,8 @@ def __preprocess_cities(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[s
                     if backtracked_index >= 0:
                         check_result = (
                             check_result
-                            and not nlp_results[backtracked_index].lemma_ in c.PUBLIC_PLACES_ENTITIES
+                            and not nlp_results[backtracked_index].lemma_
+                            in c.PUBLIC_PLACES_ENTITIES
                         )
 
                 if check_result:
@@ -152,7 +153,9 @@ def __anonymize_geoloc(geoloc_tokens: t.List[spacy.tokens.Token]) -> t.List[Anon
                 anonymization = f"{anonymization} {token.text}"
 
         res = AnonymizationResult(
-            entity=geoloc_text, anonymization=anonymization, anon_type="geoloc"
+            entity=geoloc_text.replace("ul . ", "ul. "),
+            anonymization=anonymization,
+            anon_type="geoloc",
         )
 
         anonymization_results.append(res)
