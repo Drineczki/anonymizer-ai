@@ -1,5 +1,6 @@
 # KEEPS LEMMAS OF PUBLIC ENTITIES
 people:
   - 'komornik'
-  - 'Komorniki' # uppercase lemma for komornik :D
+  - 'Komorniki' # Komornik :D
   - 'protokolant'
+  - 'ssa' # SSA
