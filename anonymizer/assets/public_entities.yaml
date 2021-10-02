@@ -1,6 +1,11 @@
-# KEEPS LEMMAS OF PUBLIC ENTITIES
+#######################################
+#   KEEPS LEMMAS OF PUBLIC ENTITIES   #
+#######################################
+
 people:
   - 'komornik'
-  - 'Komorniki' # Komornik :D
+  - 'Komorniki' # lemma for Komornik :D
   - 'protokolant'
-  - 'ssa' # SSA
+  - 'ssa' # lemma for SSA
+places:
+  - 'sąd'

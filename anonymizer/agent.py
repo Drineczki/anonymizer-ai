@@ -3,6 +3,7 @@ import typing as t
 import spacy
 
 import anonymizer.people_anonymization as peo_anon
+import anonymizer.places_anonymization as pla_anon
 from anonymizer.result import AnonymizationResult
 
 
@@ -14,9 +15,14 @@ class DocumentAnonymizer:
         text = self._preprocess(text)
         nlp_results = self.nlp(text)
 
-        people_anonymization = peo_anon.anonymize_people(nlp_results)
+        if len(nlp_results) == 0:
+            return []
 
-        return people_anonymization
+        people_anonymization = peo_anon.anonymize_people(nlp_results)
+        place_anonymization = pla_anon.anonymize_places(nlp_results)
+
+        return place_anonymization
+        # return [*people_anonymization, *place_anonymization]
 
     def _preprocess(self, text: str) -> str:
         text = text.strip()

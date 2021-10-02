@@ -3,6 +3,7 @@ import typing as t
 import spacy
 import yaml
 
+import anonymizer.constants as c
 from anonymizer.result import AnonymizationResult
 
 
@@ -13,13 +14,10 @@ def __load_assets(assets_file: str) -> t.List[str]:
     return asset["people"]
 
 
-PEOPLE_PUBLIC_ENTITIES: t.List[str] = __load_assets("./anonymizer/assets/public_entities.yaml")
+PUBLIC_PEOPLE_ENTITIES: t.List[str] = __load_assets(c.PUBLIC_ENTITIES_YAML)
 
 
 def anonymize_people(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[AnonymizationResult]:
-    if len(nlp_results) == 0:
-        return []
-
     people_tokens = preprocess(nlp_results)
     if len(people_tokens) == 0:
         return []
@@ -80,8 +78,7 @@ def preprocess(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[spacy.toke
                     if backtracked_index >= 0:
                         check_result = (
                             check_result
-                            and not nlp_results[backtracked_index].lemma_
-                            in PEOPLE_PUBLIC_ENTITIES
+                            and not nlp_results[backtracked_index].lemma_ in PUBLIC_PEOPLE_ENTITIES
                         )
 
                 if check_result:

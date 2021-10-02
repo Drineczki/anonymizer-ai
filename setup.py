@@ -25,7 +25,7 @@ setuptools.setup(
         "License :: OSI Approved :: GNU License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.7",
+    python_requires=">=3.9",
     install_requires=install_requires,
     include_package_data=True,
 )
