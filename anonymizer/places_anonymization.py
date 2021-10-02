@@ -1,7 +1,6 @@
 import typing as t
 
 import spacy
-import yaml
 
 import anonymizer.constants as c
 from anonymizer.result import AnonymizationResult
