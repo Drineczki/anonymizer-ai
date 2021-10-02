@@ -12,8 +12,6 @@ def anonymize_numerics(
     if len(matches_results) == 0:
         return []
 
-    print(matches_results)
-
     anonymizations = []
     for match_id, start, end in matches_results:
         span = doc[start : end]
