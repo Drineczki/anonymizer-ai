@@ -135,4 +135,3 @@ dmypy.json
 .vscode
 venv
 data
-models/spacy
