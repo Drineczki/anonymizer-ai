@@ -53,7 +53,7 @@ class DocumentAnonymizer:
             match for match in matches if self.nlp.vocab.strings[match[0]] == "numerical"
         ]
         numeric_anonymizations = num_anon.anonymize_numerics(numerical_matches, doc=nlp_results)
-        print(matches)
+
         return [
             *people_anonymizations,
             *places_anonymizations,
