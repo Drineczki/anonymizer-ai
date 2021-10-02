@@ -27,5 +27,5 @@ setuptools.setup(
     ],
     python_requires=">=3.7",
     install_requires=install_requires,
-    # include_package_data=True,
+    include_package_data=True,
 )
