@@ -5,11 +5,11 @@ from anonymizer._version import __version__
 # Parse requirements
 install_requires = [line.strip() for line in open("requirements.txt").readlines()]
 
-# get long description
+# Get long description
 with open("README.md", "r", encoding="UTF-8") as fh:
     long_description = fh.read()
 
-# setup
+# Setup package
 setuptools.setup(
     name="anonymizer",
     version=__version__,
