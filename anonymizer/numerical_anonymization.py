@@ -21,7 +21,7 @@ def anonymize_numerics(
             anonymization = f"{span[0].text} {anonymization}"
 
         anonymizations.append(
-            AnonymizationResult(entity=span, anonymization=anonymization, anon_type="numerical")
+            AnonymizationResult(entity=span.text, anonymization=anonymization, anon_type="numerical")
         )
 
     return anonymizations

@@ -17,7 +17,7 @@ def anonymize_internet(
         span = doc[start]
 
         anonymizations.append(
-            AnonymizationResult(entity=span, anonymization="(...)", anon_type="internet")
+            AnonymizationResult(entity=span.text, anonymization="(...)", anon_type="internet")
         )
 
     return anonymizations
