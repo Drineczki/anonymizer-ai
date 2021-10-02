@@ -19,8 +19,8 @@ def anonymize_numerics(
         span = doc[start : end]
 
         anonymization = "(...)"
-        if span[0].text == "KRS":
-            anonymization = f"KRS {anonymization}"
+        if span[0].text in ["KRS", "VIN"]:
+            anonymization = f"{span[0].text} {anonymization}"
 
         anonymizations.append(
             AnonymizationResult(entity=span, anonymization=anonymization, anon_type="numerical")

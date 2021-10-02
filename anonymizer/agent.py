@@ -14,8 +14,8 @@ class DocumentAnonymizer:
     # fmt: off
     NUMERIC_ANONYMIZATION_PATTERNS = [
         [{"TEXT": "KRS"}, {"LIKE_NUM": True}],  # KRS
+        [{"TEXT": "VIN"}, {"IS_ASCII": True}],  # VIN
         [{"TEXT": {"REGEX": "[0-9]{11}"}}],   # PESEL
-        # [{"TEXT": "nr. rej."}, {"TEXT": {"REGEX": "[A-Z]{2, 3}"}}],  # Car plate
     ]
 
     INTERNET_ANONYMIZATION_PATTERNS = [
