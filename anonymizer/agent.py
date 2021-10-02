@@ -27,8 +27,8 @@ class DocumentAnonymizer:
         if len(nlp_results) == 0:
             return []
 
-        people_anonymizations = peo_anon.anonymize_people(nlp_results)
-        places_anonymizations = pla_anon.anonymize_places(nlp_results)
+        people_anonymizations = self._postprocess(peo_anon.anonymize_people(nlp_results))
+        places_anonymizations = self._postprocess(pla_anon.anonymize_places(nlp_results))
 
         matches = self.matcher(nlp_results)
         internet_matches = [
@@ -36,20 +36,17 @@ class DocumentAnonymizer:
         ]
         internet_anonymizations = inter_anon.anonymize_internet(internet_matches, doc=nlp_results)
 
-        numerical_matches = [
-            match for match in matches if self.nlp.vocab.strings[match[0]] == "numerical"
-        ]
-        numeric_anonymizations = num_anon.anonymize_numerics(numerical_matches, doc=nlp_results)
+        # numerical_matches = [
+        #     match for match in matches if self.nlp.vocab.strings[match[0]] == "numerical"
+        # ]
+        # numeric_anonymizations = num_anon.anonymize_numerics(numerical_matches, doc=nlp_results)
 
-        return
-        # return self._postprocess(
-        #     [
-        #         *people_anonymization,
-        #         *places_anonymization,
-        #         *internet_anonymizations,
-        #         *numeric_anonymizations,
-        #     ]
-        # )
+        return [
+            *people_anonymizations,
+            *places_anonymizations,
+            *internet_anonymizations,
+            # *numeric_anonymizations,
+        ]
 
     def _preprocess(self, text: str) -> str:
         text = text.strip()
