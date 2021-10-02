@@ -6,18 +6,24 @@ import anonymizer.constants as c
 from anonymizer.result import AnonymizationResult
 
 
-def anonymize_internet(
+def anonymize_numerics(
     matches_results: t.List[tuple], doc: t.Iterable[spacy.tokens.Token]
 ) -> t.List[AnonymizationResult]:
     if len(matches_results) == 0:
         return []
 
+    print(matches_results)
+
     anonymizations = []
     for match_id, start, end in matches_results:
-        span = doc[start]
+        span = doc[start : end]
+
+        anonymization = "(...)"
+        if span[0].text == "KRS":
+            anonymization = f"KRS {anonymization}"
 
         anonymizations.append(
-            AnonymizationResult(entity=span, anonymization="(...)", anon_type="internet")
+            AnonymizationResult(entity=span, anonymization=anonymization, anon_type="numerical")
         )
 
     return anonymizations
