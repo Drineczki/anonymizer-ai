@@ -38,7 +38,7 @@ def anonymize_people(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[Anon
         person_text = " ".join([token.text for token in person_tokens])
 
         first_anonymization_char = person_tokens[0].text[0]
-        second_anonymization_char = person_tokens[-1].text.split("-")[-1][0]
+        second_anonymization_char = person_tokens[-1].text[0]
 
         anonymization = (
             f"{first_anonymization_char}. {second_anonymization_char}."

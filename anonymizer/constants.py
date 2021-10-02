@@ -14,7 +14,8 @@ PUBLIC_PEOPLE_ENTITIES: t.List[str] = [
 
 
 PUBLIC_PLACES_ENTITIES: t.List[str] = [
-    "sąd"
+    "sąd",
+    "urząd",
 ]
 
 # fmt: on

@@ -17,7 +17,7 @@ def anonymize_places(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[Anon
 
 
 def __preprocess_cities(nlp_results: t.Iterable[spacy.tokens.Token]) -> t.List[spacy.tokens.Token]:
-    BACKTRACK_WINDOW = 5
+    BACKTRACK_WINDOW = 10
 
     city_tokens = []
     loop_cnt = 0
