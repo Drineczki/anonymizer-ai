@@ -10,7 +10,6 @@ PUBLIC_PEOPLE_ENTITIES: t.List[str] = [
     "Komorniki",  # lemma for Komornik :D
     "protokolant",
     "ssa",  # lemma for SSA
-    "prezydent",
     "rzecznik",
 ]
 
